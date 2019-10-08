@@ -23,7 +23,7 @@
    ```go
    type CommLogger interface {   
        Log(format string, args ...interface{})
-   }d
+   }
    ```
 
 2. 实现接口
@@ -41,7 +41,7 @@
        FileLoggerType
    )
    
-   func CreateLogger(loggerType int) CommLogger {
+   func NewLogger(loggerType int) CommLogger {
    	if loggerType == DBLoggerType {
    		return &DbLogger{}
    	} else if loggerType == FileLoggerType {
@@ -51,3 +51,8 @@
    	return nil
    }
    ```
+
+###### 模式优点
+
+- 简化了组件的使用方式。调用方始终通过相同的接口来实现业务需求，而不需关注接口内部的实现细节。
+- 使业务调用与组件的实现细节解耦开来。调用方只修改简单的参数值，即可实现接口的切换而不需要修改其他任何业务代码。
